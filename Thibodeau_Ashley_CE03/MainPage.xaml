@@ -7,7 +7,7 @@
         <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
             <Label Text="Code Exercise 03" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
-        <ListView>
+        <ListView x:Name="listView">
             <ListView.ItemTemplate>
                 <DataTemplate>
 
