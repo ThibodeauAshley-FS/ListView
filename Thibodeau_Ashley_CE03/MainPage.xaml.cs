@@ -19,6 +19,7 @@ namespace Thibodeau_Ashley_CE03
         {
             InitializeComponent();
             addButton.Clicked += AddButton_Clicked;
+            deleteAllButton.Clicked += DeleteAllButton_Clicked;
 
             DataTemplate dt = new DataTemplate(typeof(TextCell));
             dt.SetBinding(ImageCell.ImageSourceProperty, "Source");
@@ -29,9 +30,21 @@ namespace Thibodeau_Ashley_CE03
             listView.ItemTemplate = dt;
             listView.ItemSelected += ListView_ItemSelected;
 
-            if(File.Exists(Path.Combine(App.FolderPath, $"{Path.GetRandomFileName()}.CE03.txt")))
+            Delete_All_Active();
+
+        }
+
+        private void DeleteAllButton_Clicked(object sender, EventArgs e)
+        {
+            var file = Directory.EnumerateFiles(App.FolderPath, "*.CE03.txt");
+            foreach (var filename in file)
             {
-                deleteAllButton.IsVisible = true;
+                characterList.Remove(new CharacterData
+                {
+                    Filename = filename,
+                    CharacterNameText = File.ReadAllText(filename),
+                    Date = File.GetCreationTime(filename)
+                });
             }
 
         }
@@ -52,6 +65,7 @@ namespace Thibodeau_Ashley_CE03
             base.OnAppearing();
 
             characterList.Clear();
+
             
 
             var files = Directory.EnumerateFiles(App.FolderPath, "*.CE03.txt");
@@ -66,6 +80,8 @@ namespace Thibodeau_Ashley_CE03
             }
 
             listView.ItemsSource = characterList.OrderBy(d => d.Date).ToList();
+
+            Delete_All_Active();
         }
 
         private void AddButton_Clicked(object sender, EventArgs e)
@@ -74,6 +90,18 @@ namespace Thibodeau_Ashley_CE03
             {
                 BindingContext = new CharacterData()
             });
+        }
+
+        private void Delete_All_Active()
+        {
+            if (characterList.Count >= 1)
+            {
+                deleteAllButton.IsVisible = true;
+            }
+            else if (characterList.Count < 1)
+            {
+                deleteAllButton.IsVisible = false;
+            }
         }
     }
 }

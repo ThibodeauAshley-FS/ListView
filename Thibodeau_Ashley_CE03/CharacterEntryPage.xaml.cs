@@ -85,7 +85,7 @@ namespace Thibodeau_Ashley_CE03
             var characterLevel = BindingContext as CharacterData;
             var characterClassIMG = BindingContext as CharacterData;
             var characterClass = BindingContext as CharacterData;
-
+            
             if (!string.IsNullOrWhiteSpace(characterName.CharacterNameText))
             {
                 string[] data = characterName.CharacterNameText.Split(',');
@@ -96,9 +96,9 @@ namespace Thibodeau_Ashley_CE03
                 double.TryParse(data[2], out double level);
                 characterLevel.CharacterLevel = level;
 
-                characterClassIMG.CharacterClassIMG = data[4];
+                characterClassIMG.CharacterClassIMG = data[3];
 
-                int.TryParse(data[5], out int selIndex);
+                int.TryParse(data[4], out int selIndex);
                 characterClass.CharacterClass = selIndex;
 
                 nameEntry.Text = characterName.CharacterNameText;
@@ -107,7 +107,7 @@ namespace Thibodeau_Ashley_CE03
                 classPickerImage.Source = characterClassIMG.CharacterClassIMG;
                 classPicker.SelectedIndex = characterClass.CharacterClass;
             }
-
+            
 
         }
 
