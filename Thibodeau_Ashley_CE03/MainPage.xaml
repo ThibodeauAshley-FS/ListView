@@ -16,7 +16,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button x:Name="addButton" Text="+" HorizontalOptions="End"/>
+        <Button x:Name="addButton" Text="+" HorizontalOptions="End" FontSize="24" Margin="15"/>
     </StackLayout>
 
 </ContentPage>

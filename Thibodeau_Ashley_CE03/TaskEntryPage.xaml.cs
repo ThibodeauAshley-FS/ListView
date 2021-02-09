@@ -13,8 +13,8 @@ namespace Thibodeau_Ashley_CE03
         {
             InitializeComponent();
 
-            //saveButton.ImageSource = ImageSource.FromFile("one.jpg");
-            //deleteButton.ImageSource = ImageSource.FromFile("two.jpg");
+            saveButton.ImageSource = ImageSource.FromFile("save48.png");
+            deleteButton.ImageSource = ImageSource.FromFile("delete48.png");
 
             saveButton.Clicked += SaveButton_Clicked;
             deleteButton.Clicked += DeleteButton_Clicked;
