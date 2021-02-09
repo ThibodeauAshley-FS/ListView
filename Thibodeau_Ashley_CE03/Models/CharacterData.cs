@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+    Ashley Thibodeau
+    Interface Programming
+    C20210201
+    Code Exercise 03
+
+    GitHub Repo: https://github.com/InterfaceProgramming/ce3-ThibodeauAshley-FS
+ 
+ */
+using System;
 namespace Thibodeau_Ashley_CE03.Models
 {
     public class CharacterData
