@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Thibodeau_Ashley_CE03.TaskEntryPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Thibodeau_Ashley_CE03.CharacterEntryPage">
 
     <StackLayout Margin="20">
-     <Frame BackgroundColor="#9421F3" Padding="24" CornerRadius="0">
+     <Frame BackgroundColor="#9421F3" Padding="10" CornerRadius="0">
         <Label Text="Character Entry" HorizontalTextAlignment="Center" TextColor="White" FontSize="30"/>
     </Frame>
      <Entry x:Name="nameEntry" Placeholder="Enter Name Here"/>
@@ -14,10 +14,13 @@
          <Grid.RowDefinitions>
              <RowDefinition Height="*" />
          </Grid.RowDefinitions>
-         <Label Text="Level:" VerticalTextAlignment="Center"/>
+         <Label x:Name="levelLabel" Text="Level:" VerticalTextAlignment="Center"/>
          <Stepper x:Name="levelStepper" Minimum="0" Maximum="100" Increment="1" Grid.Column="1"/>
-         <Label x:Name="classPickerImage" Grid.Row="1"/>
-         <Picker x:Name="classPicker" Title="Pick Your Class" Grid.Row="1" Grid.Column="1"/>
+         <Image x:Name="classPickerImage" Source="" Grid.Row="1"/>
+         <Picker x:Name="classPicker" Title="Choose a Class" Grid.Row="1" Grid.Column="1">
+             
+         </Picker>
+         
      </Grid>
      
      <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">

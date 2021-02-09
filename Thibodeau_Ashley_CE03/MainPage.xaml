@@ -16,7 +16,11 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button x:Name="addButton" Text="+" HorizontalOptions="End" FontSize="24" Margin="15"/>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+        <Button x:Name="deleteAllButton" Text="Delete All" HorizontalOptions="StartAndExpand" FontSize="20" Margin="15" IsVisible="False" />
+        <Button x:Name="addButton" Text="+" HorizontalOptions="EndAndExpand" FontSize="24" Margin="15"/>
+
+        </StackLayout>
     </StackLayout>
 
 </ContentPage>

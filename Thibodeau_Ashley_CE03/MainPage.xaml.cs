@@ -13,7 +13,7 @@ namespace Thibodeau_Ashley_CE03
 {
     public partial class MainPage : ContentPage
     {
-        private List<TaskData> taskList = new List<TaskData>();
+        private List<CharacterData> characterList = new List<CharacterData>();
 
         public MainPage()
         {
@@ -21,12 +21,15 @@ namespace Thibodeau_Ashley_CE03
             addButton.Clicked += AddButton_Clicked;
 
             DataTemplate dt = new DataTemplate(typeof(TextCell));
-            dt.SetBinding(TextCell.TextProperty, new Binding("Text"));
-            dt.SetBinding(TextCell.DetailProperty, new Binding("Date"));
+            dt.SetBinding(ImageCell.ImageSourceProperty, "Source");
+            
+            dt.SetBinding(TextCell.TextProperty, new Binding("Name"));
+            dt.SetBinding(TextCell.DetailProperty, new Binding("Alignment"));
             dt.SetValue(TextCell.TextColorProperty, Color.Blue);
             listView.ItemTemplate = dt;
-
             listView.ItemSelected += ListView_ItemSelected;
+
+            
 
         }
 
@@ -34,9 +37,9 @@ namespace Thibodeau_Ashley_CE03
         {
             if(e.SelectedItem != null)
             {
-                Navigation.PushAsync(new TaskEntryPage
+                Navigation.PushAsync(new CharacterEntryPage
                 {
-                    BindingContext = e.SelectedItem as TaskData
+                    BindingContext = e.SelectedItem as CharacterData
                 });
             }
         }
@@ -45,27 +48,28 @@ namespace Thibodeau_Ashley_CE03
         {
             base.OnAppearing();
 
-            taskList.Clear();
+            characterList.Clear();
+            deleteAllButton.IsVisible = true;
 
             var files = Directory.EnumerateFiles(App.FolderPath, "*.CE03.txt");
             foreach(var filename in files)
             {
-                taskList.Add(new TaskData
+                characterList.Add(new CharacterData
                 {
                     Filename = filename,
-                    Text = File.ReadAllText(filename),
+                    CharacterNameText = File.ReadAllText(filename),
                     Date = File.GetCreationTime(filename)
                 }) ;
             }
 
-            listView.ItemsSource = taskList.OrderBy(d => d.Date).ToList();
+            listView.ItemsSource = characterList.OrderBy(d => d.Date).ToList();
         }
 
         private void AddButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new TaskEntryPage
+            Navigation.PushAsync(new CharacterEntryPage
             {
-                BindingContext = new TaskData()
+                BindingContext = new CharacterData()
             });
         }
     }
