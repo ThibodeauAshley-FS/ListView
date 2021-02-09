@@ -34,9 +34,7 @@ namespace Thibodeau_Ashley_CE03
 
             if (selectedIndex != -1)
             {
-
-                    classPickerImage.Source = ImageSource.FromFile(SIImageFile(selectedIndex));
-
+                classPickerImage.Source = ImageSource.FromFile(SIImageFile(selectedIndex));
 
             }
 
@@ -85,12 +83,29 @@ namespace Thibodeau_Ashley_CE03
             var characterName = BindingContext as CharacterData;
             var characterAlignment = BindingContext as CharacterData;
             var characterLevel = BindingContext as CharacterData;
+            var characterClassIMG = BindingContext as CharacterData;
+            var characterClass = BindingContext as CharacterData;
 
-            if(!string.IsNullOrWhiteSpace(characterName.CharacterNameText))
+            if (!string.IsNullOrWhiteSpace(characterName.CharacterNameText))
             {
+                string[] data = characterName.CharacterNameText.Split(',');
+
+                characterName.CharacterNameText = data[0];
+                characterAlignment.CharacterAlignmentText = data[1];
+
+                double.TryParse(data[2], out double level);
+                characterLevel.CharacterLevel = level;
+
+                characterClassIMG.CharacterClassIMG = data[4];
+
+                int.TryParse(data[5], out int selIndex);
+                characterClass.CharacterClass = selIndex;
+
                 nameEntry.Text = characterName.CharacterNameText;
                 alignmentEntry.Text = characterAlignment.CharacterAlignmentText;
                 levelStepper.Value = characterLevel.CharacterLevel;
+                classPickerImage.Source = characterClassIMG.CharacterClassIMG;
+                classPicker.SelectedIndex = characterClass.CharacterClass;
             }
 
 
@@ -119,16 +134,20 @@ namespace Thibodeau_Ashley_CE03
             var characterClassIMG = (CharacterData)BindingContext;
             characterClassIMG.CharacterClassIMG = SIImageFile(classPicker.SelectedIndex);
 
+            var characterClass = (CharacterData)BindingContext;
+            characterClass.CharacterClass = classPicker.SelectedIndex;
+
             if (string.IsNullOrWhiteSpace(characterName.Filename))
             {
                 //New
                 var filename = Path.Combine(App.FolderPath, $"{Path.GetRandomFileName()}.CE03.txt");
-                File.WriteAllText(filename, characterName.CharacterNameText);
+               
+                File.WriteAllText(filename, $"{characterName.CharacterNameText},{characterAlignment.CharacterAlignmentText},{levelStepper.Value.ToString()},{characterClassIMG.CharacterClassIMG},{characterClass.CharacterClass.ToString()}");
             }
             else
             {
                 //Update
-                File.WriteAllText(characterName.Filename, characterName.CharacterNameText);
+                File.WriteAllText(characterName.Filename, $"{characterName.CharacterNameText},{characterAlignment.CharacterAlignmentText},{levelStepper.Value.ToString()},{characterClassIMG.CharacterClassIMG},{characterClass.CharacterClass.ToString()}");
             }
 
             Navigation.PopAsync();

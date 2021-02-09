@@ -29,7 +29,10 @@ namespace Thibodeau_Ashley_CE03
             listView.ItemTemplate = dt;
             listView.ItemSelected += ListView_ItemSelected;
 
-            
+            if(File.Exists(Path.Combine(App.FolderPath, $"{Path.GetRandomFileName()}.CE03.txt")))
+            {
+                deleteAllButton.IsVisible = true;
+            }
 
         }
 
@@ -49,7 +52,7 @@ namespace Thibodeau_Ashley_CE03
             base.OnAppearing();
 
             characterList.Clear();
-            deleteAllButton.IsVisible = true;
+            
 
             var files = Directory.EnumerateFiles(App.FolderPath, "*.CE03.txt");
             foreach(var filename in files)
