@@ -100,15 +100,15 @@ namespace Thibodeau_Ashley_CE03
                 string[] data = characterName.CharacterNameText.Split(',');
 
                 characterName.CharacterNameText = data[0];
-                characterAlignment.CharacterAlignmentText = data[1];
+                //characterAlignment.CharacterAlignmentText = data[1];
 
-                double.TryParse(data[2], out double level);
-                characterLevel.CharacterLevel = level;
+                //double.TryParse(data[2], out double level);
+                //characterLevel.CharacterLevel = level;
 
-                characterClassIMG.CharacterClassIMG = data[3];
+                //characterClassIMG.CharacterClassIMG = data[3];
 
-                int.TryParse(data[4], out int selIndex);
-                characterClass.CharacterClass = selIndex;
+                //int.TryParse(data[4], out int selIndex);
+                //characterClass.CharacterClass = selIndex;
 
                 nameEntry.Text = characterName.CharacterNameText;
                 alignmentEntry.Text = characterAlignment.CharacterAlignmentText;
@@ -146,12 +146,13 @@ namespace Thibodeau_Ashley_CE03
             var characterClass = (CharacterData)BindingContext;
             characterClass.CharacterClass = classPicker.SelectedIndex;
 
+            
             if (string.IsNullOrWhiteSpace(characterName.Filename))
             {
                 //New
                 var filename = Path.Combine(App.FolderPath, $"{Path.GetRandomFileName()}.CE03.txt");
                
-                File.WriteAllText(filename, $"{characterName.CharacterNameText},{characterAlignment.CharacterAlignmentText},{levelStepper.Value.ToString()},{characterClassIMG.CharacterClassIMG},{characterClass.CharacterClass.ToString()}");
+                File.WriteAllText(filename, $"{ characterName.CharacterNameText},{characterAlignment.CharacterAlignmentText},{levelStepper.Value.ToString()},{characterClassIMG.CharacterClassIMG},{characterClass.CharacterClass.ToString()}");
             }
             else
             {

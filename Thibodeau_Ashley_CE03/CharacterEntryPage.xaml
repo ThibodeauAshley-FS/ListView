@@ -1,13 +1,4 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<!--/*
-    Ashley Thibodeau
-    Interface Programming
-    C20210201
-    Code Exercise 03
-
-    GitHub Repo: https://github.com/InterfaceProgramming/ce3-ThibodeauAshley-FS
- 
- */-->
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Thibodeau_Ashley_CE03.CharacterEntryPage">
 
     <StackLayout Margin="20">
@@ -23,6 +14,7 @@
          <Grid.RowDefinitions>
              <RowDefinition Height="*" />
          </Grid.RowDefinitions>
+
          <Label x:Name="levelLabel" Text="Level:" VerticalTextAlignment="Center"/>
          <Stepper x:Name="levelStepper" Minimum="0" Maximum="100" Increment="1" Grid.Column="1"/>
          <Image x:Name="classPickerImage" Source="" Grid.Row="1"/>
