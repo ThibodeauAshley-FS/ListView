@@ -27,12 +27,13 @@ namespace Thibodeau_Ashley_CE03
         public MainPage()
         {
             InitializeComponent();
+
             addButton.Clicked += AddButton_Clicked;
             deleteAllButton.Clicked += DeleteAllButton_Clicked;
 
             DataTemplate dt = new DataTemplate(typeof(ImageCell));
 
-            dt.SetBinding(ImageCell.ImageSourceProperty, new Binding("CharacterClassIMG"));
+            
             dt.SetBinding(ImageCell.TextProperty, new Binding("CharacterNameText"));
             dt.SetBinding(ImageCell.DetailProperty, new Binding("Date"));
             dt.SetValue(ImageCell.TextColorProperty, Color.Blue);
@@ -45,17 +46,17 @@ namespace Thibodeau_Ashley_CE03
 
         private void DeleteAllButton_Clicked(object sender, EventArgs e)
         {
-            var file = Directory.EnumerateFiles(App.FolderPath, "*.CE03.txt");
-            foreach (var filename in file)
+            for (int i = 0; i < characterList.Count; i++)
             {
-                characterList.Remove(new CharacterData
-                {
-                    Filename = filename,
-                    CharacterNameText = File.ReadAllText(filename),
-                    Date = File.GetCreationTime(filename)
-                });
+                CharacterData cd = characterList[i];
+                if (File.Exists(cd.Filename))
+                {  
+                    File.Delete(cd.Filename);
+                }
+                
             }
 
+            ListViewLoad();
         }
 
 
@@ -75,11 +76,17 @@ namespace Thibodeau_Ashley_CE03
         {
             base.OnAppearing();
 
+            ListViewLoad();
+
+           
+        }
+
+        private void ListViewLoad()
+        {
             characterList.Clear();
 
-
             var files = Directory.EnumerateFiles(App.FolderPath, "*.CE03.txt");
-            foreach(var filename in files)
+            foreach (var filename in files)
             {
                 string strData = File.ReadAllText(filename);
                 string[] data = strData.Split(',');
@@ -94,25 +101,25 @@ namespace Thibodeau_Ashley_CE03
                 characterList.Add(new CharacterData
                 {
                     Filename = filename,
-                    CharacterNameText= data_name,
+                    CharacterNameText = data_name,
                     CharacterAlignmentText = data_align,
                     CharacterLevel = data_level,
-                    CharacterClass = data_class,  
+                    CharacterClass = data_class,
                     Date = File.GetCreationTime(filename),
 
-                }) ;
+                });
 
-                
+
             }
 
-            
+
 
 
             listView.ItemsSource = characterList.OrderBy(d => d.Date).ToList();
 
             DeleteAll_Button();
-        }
 
+        }
         //send to new entry page
         private void AddButton_Clicked(object sender, EventArgs e)
         {

@@ -100,15 +100,6 @@ namespace Thibodeau_Ashley_CE03
                 string[] data = characterName.CharacterNameText.Split(',');
 
                 characterName.CharacterNameText = data[0];
-                //characterAlignment.CharacterAlignmentText = data[1];
-
-                //double.TryParse(data[2], out double level);
-                //characterLevel.CharacterLevel = level;
-
-                //characterClassIMG.CharacterClassIMG = data[3];
-
-                //int.TryParse(data[4], out int selIndex);
-                //characterClass.CharacterClass = selIndex;
 
                 nameEntry.Text = characterName.CharacterNameText;
                 alignmentEntry.Text = characterAlignment.CharacterAlignmentText;
