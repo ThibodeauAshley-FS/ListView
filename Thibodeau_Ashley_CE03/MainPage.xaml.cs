@@ -31,18 +31,22 @@ namespace Thibodeau_Ashley_CE03
             addButton.Clicked += AddButton_Clicked;
             deleteAllButton.Clicked += DeleteAllButton_Clicked;
 
+            listView.ItemsSource = characterList;
+
             DataTemplate dt = new DataTemplate(typeof(ImageCell));
 
-            
-            dt.SetBinding(ImageCell.TextProperty, new Binding("CharacterNameText"));
-            dt.SetBinding(ImageCell.DetailProperty, new Binding("Date"));
-            dt.SetValue(ImageCell.TextColorProperty, Color.Blue);
-            listView.ItemTemplate = dt;
+            listView.ItemTemplate.SetBinding(ImageCell.ImageSourceProperty, "CharacterClassIMG");
+            listView.ItemTemplate.SetBinding(ImageCell.TextProperty, new Binding("CharacterNameText"));
+            listView.ItemTemplate.SetBinding(ImageCell.DetailProperty, new Binding("Date"));
+            listView.ItemTemplate.SetValue(ImageCell.TextColorProperty, Color.Blue);
+
             listView.ItemSelected += ListView_ItemSelected;
 
             DeleteAll_Button();
 
         }
+
+        
 
         private void DeleteAllButton_Clicked(object sender, EventArgs e)
         {

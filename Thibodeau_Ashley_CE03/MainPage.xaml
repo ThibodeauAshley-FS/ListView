@@ -1,13 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!--/*
-    Ashley Thibodeau
-    Interface Programming
-    C20210201
-    Code Exercise 03
-
-    GitHub Repo: https://github.com/InterfaceProgramming/ce3-ThibodeauAshley-FS
- 
- */-->
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Thibodeau_Ashley_CE03.MainPage">
@@ -19,9 +10,7 @@
         <ListView x:Name="listView">
             <ListView.ItemTemplate>
                 <DataTemplate>
-
-                <TextCell Text="" Detail="" />
-
+                    <ImageCell Text="" ImageSource="" Detail=""  />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
