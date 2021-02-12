@@ -137,21 +137,33 @@ namespace Thibodeau_Ashley_CE03
             var characterClass = (CharacterData)BindingContext;
             characterClass.CharacterClass = classPicker.SelectedIndex;
 
-            
-            if (string.IsNullOrWhiteSpace(characterName.Filename))
+            if(!string.IsNullOrWhiteSpace(characterName.CharacterNameText))
             {
-                //New
-                var filename = Path.Combine(App.FolderPath, $"{Path.GetRandomFileName()}.CE03.txt");
-               
-                File.WriteAllText(filename, $"{ characterName.CharacterNameText},{characterAlignment.CharacterAlignmentText},{levelStepper.Value.ToString()},{characterClassIMG.CharacterClassIMG},{characterClass.CharacterClass.ToString()}");
+
+                if (string.IsNullOrWhiteSpace(characterName.Filename))
+                {
+                    //New
+                    var filename = Path.Combine(App.FolderPath, $"{Path.GetRandomFileName()}.CE03.txt");
+
+                    File.WriteAllText(filename, $"{ characterName.CharacterNameText},{characterAlignment.CharacterAlignmentText},{levelStepper.Value.ToString()},{characterClassIMG.CharacterClassIMG},{characterClass.CharacterClass.ToString()}");
+                }
+                else
+                {
+                    //Update
+                    File.WriteAllText(characterName.Filename, $"{characterName.CharacterNameText},{characterAlignment.CharacterAlignmentText},{levelStepper.Value.ToString()},{characterClassIMG.CharacterClassIMG},{characterClass.CharacterClass.ToString()}");
+                }
+                Navigation.PopAsync();
             }
             else
             {
-                //Update
-                File.WriteAllText(characterName.Filename, $"{characterName.CharacterNameText},{characterAlignment.CharacterAlignmentText},{levelStepper.Value.ToString()},{characterClassIMG.CharacterClassIMG},{characterClass.CharacterClass.ToString()}");
+                errorLabel.IsVisible = true;
+                errorLabel.Text = "Please Enter Name to Save";
             }
 
-            Navigation.PopAsync();
+
+
+
+
         }
     }
 }
