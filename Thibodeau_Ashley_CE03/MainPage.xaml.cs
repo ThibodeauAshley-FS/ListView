@@ -34,8 +34,8 @@ namespace Thibodeau_Ashley_CE03
             listView.ItemsSource = characterList;
 
             DataTemplate dt = new DataTemplate(typeof(ImageCell));
-
-            listView.ItemTemplate.SetBinding(ImageCell.ImageSourceProperty, "CharacterClassIMG");
+            //?????
+            listView.ItemTemplate.SetBinding(ImageCell.ImageSourceProperty, new Binding("CharacterClassIMG"));
             listView.ItemTemplate.SetBinding(ImageCell.TextProperty, new Binding("CharacterNameText"));
             listView.ItemTemplate.SetBinding(ImageCell.DetailProperty, new Binding("Date"));
             listView.ItemTemplate.SetValue(ImageCell.TextColorProperty, Color.Blue);
@@ -108,6 +108,7 @@ namespace Thibodeau_Ashley_CE03
                     CharacterNameText = data_name,
                     CharacterAlignmentText = data_align,
                     CharacterLevel = data_level,
+                    CharacterClassIMG = data_img,
                     CharacterClass = data_class,
                     Date = File.GetCreationTime(filename),
 
